@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools Curated Directory Platform</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; scroll-behavior: smooth; }
+        body { background-color: #0d1117; color: #c9d1d9; padding-bottom: 60px; }
+        header { background-color: #161b22; padding: 16px; border-bottom: 1px solid #30363d; display: flex; flex-direction: column; gap: 16px; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #58a6ff; letter-spacing: -0.5px; }
+        .main-nav { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+        .main-nav a { color: #8b949e; text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        .main-nav a:hover { color: #58a6ff; }
+        .search-box { width: 100%; max-width: 440px; }
+        .search-box input { width: 100%; padding: 12px 16px; background-color: #0d1117; border: 1px solid #30363d; border-radius: 8px; color: #ffffff; font-size: 0.95rem; outline: none; }
+        .search-box input:focus { border-color: #58a6ff; }
+        .categories-bar { display: flex; gap: 10px; padding: 14px 16px; overflow-x: auto; background-color: #161b22; border-bottom: 1px solid #21262d; white-space: nowrap; }
+        .categories-bar::-webkit-scrollbar { display: none; }
+        .cat-btn { background-color: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 500; }
+        .cat-btn.active, .cat-btn:hover { background-color: #238636; color: #ffffff; border-color: #2ea043; }
+        main { max-width: 1200px; margin: 0 auto; padding: 16px; }
+        .tool-section { margin-top: 32px; }
+        .tool-section h2 { font-size: 1.3rem; margin-bottom: 16px; color: #f0f6fc; display: flex; align-items: center; gap: 8px; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .tool-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 12px; position: relative; }
+        .tool-meta { display: flex; align-items: center; gap: 12px; }
+        .tool-logo { font-size: 2rem; background-color: #0d1117; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: 1px solid #30363d; }
+        .tool-card h3 { color: #ffffff; font-size: 1.15rem; font-weight: 600; }
+        .description { font-size: 0.88rem; color: #8b949e; line-height: 1.5; }
+        .features { font-size: 0.82rem; color: #c9d1d9; background-color: #0d1117; padding: 8px 12px; border-radius: 6px; border: 1px solid #21262d; line-height: 1.4; }
+        .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+        .badge { font-size: 0.72rem; padding: 4px 10px; border-radius: 12px; font-weight: 700; text-transform: uppercase; }
+        .badge.free { background-color: rgba(35, 134, 54, 0.15); color: #56d364; border: 1px solid rgba(56, 211, 100, 0.3); }
+        .badge.paid { background-color: rgba(218, 54, 55, 0.15); color: #ff7b72; border: 1px solid rgba(255, 123, 114, 0.3); }
+        .rating { font-size: 0.85rem; color: #f1e05a; font-weight: 600; }
+        .tool-link { display: block; text-align: center; background-color: #21262d; color: #58a6ff; border: 1px solid #30363d; padding: 10px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 600; margin-top: auto; }
+        .content-section { margin-top: 48px; padding: 24px; background-color: #161b22; border-radius: 12px; border: 1px solid #30363d; }
+        .content-section h2 { margin-bottom: 12px; color: #ffffff; font-size: 1.3rem; }
+        .content-section p { color: #8b949e; font-size: 0.95rem; line-height: 1.6; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">🤖 AI TOOLS HUD</div>
+        <nav class="main-nav">
+            <a href="#home" id="navHomeLink">Home</a>
+            <a href="#ai-news">AI News</a>
+            <a href="#tutorials">Tutorials</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="search-box">
+            <input type="text" id="searchBar" placeholder="Search across all items... (e.g., Image)">
+        </div>
+    </header>
+
+    <section class="categories-bar">
+        <button class="cat-btn active" data-category="all">All Ecosystems</button>
+        <button class="cat-btn" data-category="writing">✍️ Writing AI</button>
+        <button class="cat-btn" data-category="image">🖼️ Image AI</button>
+        <button class="cat-btn" data-category="video">🎥 Video AI</button>
+        <button class="cat-btn" data-category="music">🎵 Music AI</button>
+        <button class="cat-btn" data-category="coding">💻 Coding AI</button>
+        <button class="cat-btn" data-category="pdf">📄 PDF AI</button>
+        <button class="cat-btn" data-category="voice">🎙️ Voice AI</button>
+        <button class="cat-btn" data-category="productivity">⚡ Productivity AI</button>
+        <button class="cat-btn" data-category="marketing">📈 Marketing AI</button>
+        <button class="cat-btn" data-category="chat">💬 Chat AI</button>
+    </section>
+
+    <main>
+        <section id="searchResultsSection" class="tool-section hidden">
+            <h2 id="searchTitle">Search Processing Output</h2>
+            <div class="tools-grid" id="searchResultsGrid"></div>
+        </section>
+
+        <div id="defaultHomeContent">
+            <section class="tool-section">
+                <h2>⭐ Top AI Tools</h2>
+                <div class="tools-grid" id="topToolsGrid"></div>
+            </section>
+            <section class="tool-section">
+                <h2>🔥 Trending AI Tools</h2>
+                <div class="tools-grid" id="trendingToolsGrid"></div>
+            </section>
+            <section class="tool-section">
+                <h2>🆕 Latest AI Tools</h2>
+                <div class="tools-grid" id="latestToolsGrid"></div>
+            </section>
+            <section class="tool-section">
+                <h2>📈 Popular AI Tools</h2>
+                <div class="tools-grid" id="popularToolsGrid"></div>
+            </section>
+        </div>
+
+        <section id="ai-news" class="content-section">
+            <h2>📰 Latest AI News</h2>
+            <p>Welcome to your central clearinghouse for real-time breakthroughs. OpenAI, Google DeepMind, and open-source models update their parameter weight layers hourly.</p>
+        </section>
+        <section id="tutorials" class="content-section">
+            <h2>📚 Tutorials & Resource Guides</h2>
+            <p>Unlock advanced generation patterns using our modular step-by-step walkthrough guides.</p>
+        </section>
+        <section id="about" class="content-section">
+            <h2>👤 About Our Platform</h2>
+            <p>Our database solves digital discovery fragmentation by sorting, parsing, ranking, and classifying live artificial intelligence entities.</p>
+        </section>
+        <section id="contact" class="content-section">
+            <h2>📞 Contact & Submissions Portal</h2>
+            <p>Are you a core system engineer or product builder launching a novel system infrastructure? Connect directly with our listing curation review desk.</p>
+        </section>
+    </main>
+
+        <script>
+        // இங்கு ஒவ்வொரு டூலுக்கும் உண்மையான இணையதள லிங்க் (link) சேர்க்கப்பட்டுள்ளது
+        const tools = [
+            { name: "ChatGPT", cat: "chat", logo: "💬", desc: "AI assistant for writing and coding.", feat: "Plugin APIs", type: "Free / Paid", rate: "4.9", link: "https://chatgpt.com" },
+            { name: "Midjourney", cat: "image", logo: "🎨", desc: "AI engine for high-quality images.", feat: "Aspect styling", type: "Paid", rate: "4.8", link: "https://midjourney.com" },
+            { name: "Runway Gen-2", cat: "video", logo: "🎬", desc: "Video synthesis from text scripts.", feat: "Motion tracking", type: "Paid", rate: "4.6", link: "https://runwayml.com" },
+            { name: "v0 by Vercel", cat: "coding", logo: "💻", desc: "Generative UI engine for React code.", feat: "Tailwind output", type: "Free / Paid", rate: "4.7", link: "https://v0.dev" },
+            { name: "Jasper", cat: "writing", logo: "✍️", desc: "AI suite built for marketing teams.", feat: "SEO workflows", type: "Paid", rate: "4.5", link: "https://jasper.ai" },
+            { name: "Suno AI", cat: "music", logo: "🎵", desc: "Generates fully arranged acoustic songs.", feat: "Text to lyric", type: "Free / Paid", rate: "4.8", link: "https://suno.com" },
+            { name: "ElevenLabs", cat: "voice", logo: "🎙️", desc: "Natural voice synthesis engine.", feat: "Voice cloning", type: "Free / Paid", rate: "4.7", link: "https://elevenlabs.io" },
+            { name: "ChatPDF", cat: "pdf", logo: "📄", desc: "Chat with PDF files to get facts.", feat: "Context lookup", type: "Free / Paid", rate: "4.4", link: "https://chatpdf.com" },
+            { name: "Notion AI", cat: "productivity", logo: "⚡", desc: "Embedded smart workspace assistant.", feat: "Action items", type: "Paid", rate: "4.6", link: "https://notion.so" },
+            { name: "AdCreative AI", cat: "marketing", logo: "📈", desc: "Automates ad banner variations.", feat: "Score metrics", type: "Paid", rate: "4.3", link: "https://adcreative.ai" }
+        ];
+
+        const topGrid = document.getElementById("topToolsGrid");
+        const trendGrid = document.getElementById("trendingToolsGrid");
+        const lateGrid = document.getElementById("latestToolsGrid");
+        const popGrid = document.getElementById("popularToolsGrid");
+        const bar = document.getElementById("searchBar");
+        const resSec = document.getElementById("searchResultsSection");
+        const resGrid = document.getElementById("searchResultsGrid");
+        const title = document.getElementById("searchTitle");
+        const homeView = document.getElementById("defaultHomeContent");
+        const btns = document.querySelectorAll(".cat-btn");
+
+        // href="${t.link}" என்று மாற்றியமைக்கப்பட்டுள்ளது, இதனால் லிங்க் வேலை செய்யும்
+        function makeCard(t) {
+            const bCls = t.type.toLowerCase().includes('free') ? 'free' : 'paid';
+            return `
+                <div class="tool-card">
+                    <div class="tool-meta"><span class="tool-logo">${t.logo}</span><h3>${t.name}</h3></div>
+                    <p class="description">${t.desc}</p>
+                    <p class="features"><strong>Features:</strong> ${t.feat}</p>
+                    <div class="card-footer"><span class="badge ${bCls}">${t.type}</span><span class="rating">⭐ ${t.rate}</span></div>
+                    <a href="${t.link}" class="tool-link" target="_blank">Visit Website</a>
+                </div>`;
+        }
+
+        function showHome() {
+            topGrid.innerHTML = tools.slice(0, 3).map(makeCard).join('');
+            trendGrid.innerHTML = tools.slice(3, 6).map(makeCard).join('');
+            lateGrid.innerHTML = tools.slice(6, 8).map(makeCard).join('');
+            popGrid.innerHTML = tools.slice(8, 10).map(makeCard).join('');
+        }
+
+        function runFilter(q, type = "search") {
+            let res = [];
+            if (type === "category") {
+                if (q === "all") { clearFilter(); return; }
+                res = tools.filter(t => t.cat === q);
+                title.innerHTML = `🤖 Category: <span style="color:#58a6ff">${q.toUpperCase()}</span>`;
+            } else {
+                const txt = q.toLowerCase().trim();
+                if (txt === "") { clearFilter(); return; }
+                res = tools.filter(t => t.name.toLowerCase().includes(txt) || t.cat.toLowerCase().includes(txt));
+                title.innerHTML = `🔍 Search: <span style="color:#58a6ff">"${q}"</span>`;
+            }
+            homeView.classList.add("hidden");
+            resSec.classList.remove("hidden");
+            resGrid.innerHTML = res.length === 0 ? `<p style="padding:20px;">No tools found.</p>` : res.map(makeCard).join('');
+        }
+
+        function clearFilter() { resSec.classList.add("hidden"); homeView.classList.remove("hidden"); bar.value = ""; }
+
+        bar.addEventListener("input", (e) => {
+            btns.forEach(b => b.classList.remove("active"));
+            document.querySelector('[data-category="all"]').classList.add("active");
+            runFilter(e.target.value, "search");
+        });
+
+        btns.forEach(b => {
+            b.addEventListener("click", () => {
+                btns.forEach(x => x.classList.remove("active"));
+                b.classList.add("active");
+                bar.value = ""; 
+                runFilter(b.getAttribute("data-category"), "category");
+            });
+        });
+
+        document.getElementById("navHomeLink").addEventListener("click", () => {
+            btns.forEach(b => b.classList.remove("active"));
+            document.querySelector('[data-category="all"]').classList.add("active");
+            clearFilter();
+        });
+
+        showHome();
+    </script>
+</body>
+</html>
